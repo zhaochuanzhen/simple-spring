@@ -5,13 +5,15 @@ import com.mright.spring.framework.beans.factory.config.BeanDefinition;
 
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory {
 
+    @Override
     protected Object createBean(String beanName, BeanDefinition beanDefinition) throws BeansException {
+        Object bean = null;
         try {
-            Object bean = beanDefinition.getBeanClass().newInstance();
-            addSingleton(beanName, bean);
-            return bean;
+            bean = beanDefinition.getBeanClass().newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new BeansException("InstantiationException of bean faild", e);
+            e.printStackTrace();
         }
+        addSingleton(beanName, bean);
+        return bean;
     }
 }
