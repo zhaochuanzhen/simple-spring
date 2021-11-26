@@ -10,7 +10,6 @@ import com.mright.spring.framework.beans.factory.config.BeanPostProcessor;
 import com.mright.spring.framework.beans.factory.config.BeanReference;
 
 import java.lang.reflect.Constructor;
-import java.text.MessageFormat;
 
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
 
