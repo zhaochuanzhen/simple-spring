@@ -1,6 +1,9 @@
 package com.mright.spring.framework.bean;
 
 public class IndexService {
+    public IndexService() {
+        System.out.println("IndexService 构造方法");
+    }
 
     private String uId;
 
