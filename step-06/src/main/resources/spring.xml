@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+
+    <bean id="indexDao" class="com.mright.spring.framework.bean.IndexDao"/>
+
+    <bean id="indexService" class="com.mright.spring.framework.bean.IndexService">
+        <property name="uId" value="10001"/>
+        <property name="indexDao" ref="indexDao"/>
+    </bean>
+
+</beans>
