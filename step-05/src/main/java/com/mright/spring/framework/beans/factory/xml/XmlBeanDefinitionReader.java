@@ -19,7 +19,7 @@ import java.io.InputStream;
 
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
-    protected XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
+    public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
         super(registry);
     }
 
@@ -29,23 +29,19 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
     @Override
     public void loadBeanDefinitions(Resource resource) throws BeansException {
-        try(InputStream inputStream = resource.getInputStream()) {
-            doLoadBeanDefinitions(inputStream);
+        try {
+            try (InputStream inputStream = resource.getInputStream()) {
+                doLoadBeanDefinitions(inputStream);
+            }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new BeansException(e.getMessage());
+            throw new BeansException("IOException parsing XML document from ");
         }
     }
 
     @Override
     public void loadBeanDefinitions(Resource... resources) throws BeansException {
         for (Resource resource : resources) {
-            try(InputStream inputStream = resource.getInputStream()) {
-                doLoadBeanDefinitions(inputStream);
-            } catch (ClassNotFoundException | IOException e) {
-                e.printStackTrace();
-                throw new BeansException(e.getMessage());
-            }
+            loadBeanDefinitions(resource);
         }
     }
 
@@ -60,6 +56,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         Document doc = XmlUtil.readXML(inputStream);
         Element root = doc.getDocumentElement();
         NodeList childNodes = root.getChildNodes();
+
         for (int i = 0; i < childNodes.getLength(); i++) {
             // 判断元素
             if (!(childNodes.item(i) instanceof Element)) continue;
@@ -103,4 +100,5 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             getRegistry().registerBeanDefinition(beanName, beanDefinition);
         }
     }
+
 }

@@ -10,11 +10,7 @@ public class BeanDefinition {
 
     public BeanDefinition(Class beanClass) {
         this.beanClass = beanClass;
-    }
-
-    public BeanDefinition(Class beanClass, PropertyValues propertyValues) {
-        this.beanClass = beanClass;
-        this.propertyValues = propertyValues;
+        this.propertyValues = new PropertyValues();
     }
 
     public Class getBeanClass() {
