@@ -25,4 +25,5 @@ public class Test04 {
         UserService userService2 = (UserService) beanFactory.getBean("userService", "chenduxiu");
         userService2.sayHello();
     }
+
 }
