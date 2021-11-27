@@ -39,6 +39,12 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return bean;
     }
 
+    /**
+     * 在创建Bean对象的时候，需要把销毁方法保存起来、方便执行销毁动作进行调用。
+     * <p>
+     * 那么这个销毁方法的具体方法信息，会被注册到DefaultSingletonBeanRegistry的Map<String, DisposableBean> disposableBeans中去，因为这个接口的方法最终
+     * 会被AbstractApplicationContext 的 close 方法通过 getBeanFactory().destroySingletons() 调用
+     */
     protected void registerDisposableBeanIfNecessary(String beanName, Object bean, BeanDefinition beanDefinition) {
         if (bean instanceof DisposableBean || StrUtil.isNotEmpty(beanDefinition.getDestroyMethodName())) {
             registerDisposableBean(beanName, new DisposableBeanAdapter(bean, beanName, beanDefinition));
@@ -106,6 +112,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return wrappedBean;
     }
 
+    /**
+     * 两种执行初始化方法的方式。1、实现InitializingBean接口、执行afterPropertiesSet方法；2、指定init-method方法
+     */
     private void invokeInitMethods(String beanName, Object bean, BeanDefinition beanDefinition) throws Exception {
         // 1. 实现接口 InitializingBean
         if (bean instanceof InitializingBean) {
