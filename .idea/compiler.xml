@@ -12,6 +12,7 @@
         <module name="step-03" />
         <module name="step-06" />
         <module name="step-05" />
+        <module name="step-08" />
         <module name="spring-annotation" />
         <module name="step-07" />
       </profile>
