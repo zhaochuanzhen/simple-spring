@@ -1,6 +1,7 @@
 package com.mright.spring.framework.test;
 
 import com.mright.spring.framework.bean.IndexService;
+import com.mright.spring.framework.common.CustomEvent;
 import com.mright.spring.framework.context.support.ClassPathXmlApplicationContext;
 import org.junit.Test;
 
@@ -54,5 +55,14 @@ public class Test07 {
         // 2. 调用代理方法
         IndexService userService = applicationContext.getBean("indexService", IndexService.class);
         System.out.println("测试结果：" + userService.queryUserInfo());
+    }
+
+
+    @Test
+    public void test_event() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        applicationContext.publishEvent(new CustomEvent(applicationContext, 1019129009086763L, "成功了！"));
+
+        applicationContext.registerShutdownHook();
     }
 }
