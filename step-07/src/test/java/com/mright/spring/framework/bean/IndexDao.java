@@ -10,10 +10,16 @@ public class IndexDao {
 
     private static Map<String, String> hashMap = new HashMap<>();
 
-    public void initMethod() {
+    public void initDataMethod(){
+        System.out.println("IndexDao 初始化方法");
         hashMap.put("10001", "小傅哥");
         hashMap.put("10002", "八杯水");
         hashMap.put("10003", "阿毛");
+    }
+
+    public void destroyDataMethod(){
+        System.out.println("IndexDao 销毁方法");
+        hashMap.clear();
     }
 
     public String queryUserName(String uId) {
