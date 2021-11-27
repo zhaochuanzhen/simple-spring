@@ -14,4 +14,15 @@ public class Test07 {
         final IndexService indexService = context.getBean("indexService", IndexService.class);
         System.out.println(indexService.queryUserInfo());
     }
+
+    @Test
+    public void test_aware() {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        context.registerShutdownHook();
+
+        final IndexService indexService = context.getBean("indexService", IndexService.class);
+        System.out.println(indexService.queryUserInfo());
+        System.out.println("ApplicationContextAware：" + indexService.getApplicationContext());
+        System.out.println("BeanFactoryAware：" + indexService.getBeanFactory());
+    }
 }
