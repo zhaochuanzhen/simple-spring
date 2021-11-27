@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+
+    <bean id="indexDao" class="com.mright.spring.framework.bean.IndexDao" init-method="initDataMethod"
+          destroy-method="destroyDataMethod"/>
+
+    <bean id="indexService" class="com.mright.spring.framework.bean.IndexService" scope="prototype">
+        <property name="uId" value="10001"/>
+        <property name="indexDao" ref="proxyBeanFactory"/>
+    </bean>
+
+    <bean id="myBeanPostProcessor" class="com.mright.spring.framework.common.MyBeanPostProcessor"/>
+
+    <bean id="myPostFactoryPostProcessor" class="com.mright.spring.framework.common.MyPostFactoryPostProcessor"/>
+
+    <bean id="proxyBeanFactory" class="com.mright.spring.framework.common.ProxyBeanFactory"/>
+
+    <bean id="customEventListener" class="com.mright.spring.framework.common.CustomEventListener"/>
+</beans>
