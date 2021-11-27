@@ -11,7 +11,7 @@ public class IndexService implements InitializingBean, DisposableBean, BeanNameA
 
     private String uId;
 
-    private IndexDao indexDao;
+    private IIndexDao indexDao;
 
     private ApplicationContext applicationContext;
     private BeanFactory beanFactory;
@@ -28,11 +28,11 @@ public class IndexService implements InitializingBean, DisposableBean, BeanNameA
         this.uId = uId;
     }
 
-    public IndexDao getIndexDao() {
+    public IIndexDao getIndexDao() {
         return indexDao;
     }
 
-    public void setIndexDao(IndexDao indexDao) {
+    public void setIndexDao(IIndexDao indexDao) {
         this.indexDao = indexDao;
     }
 
