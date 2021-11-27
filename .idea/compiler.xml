@@ -15,6 +15,7 @@
         <module name="step-08" />
         <module name="spring-annotation" />
         <module name="step-07" />
+        <module name="step-09" />
       </profile>
     </annotationProcessing>
   </component>
