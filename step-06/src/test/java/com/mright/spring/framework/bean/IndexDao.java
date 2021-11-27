@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IndexDao {
+    public IndexDao() {
+        System.out.println("IndexDao 构造方法");
+    }
 
     private static Map<String, String> hashMap = new HashMap<>();
 
