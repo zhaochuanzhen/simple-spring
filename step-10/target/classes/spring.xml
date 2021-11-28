@@ -16,4 +16,5 @@
     <bean id="proxyBeanFactory" class="com.mright.spring.framework.common.ProxyBeanFactory"/>
 
     <bean id="customEventListener" class="com.mright.spring.framework.common.CustomEventListener"/>
+    <bean id="customEventListener1" class="com.mright.spring.framework.common.CustomEventListener1"/>
 </beans>
