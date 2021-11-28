@@ -23,8 +23,8 @@ public class ApplicationConfiguration {
 
     @Conditional({LinuxCondition.class})
     @Bean
-    public Person linux() {
-        return new Person("linux");
+    public Person windows() {
+        return new Person("Windows");
     }
 
     @Bean(initMethod = "init", destroyMethod = "destroy")
