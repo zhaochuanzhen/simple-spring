@@ -1,77 +1,24 @@
 package com.mright.spring.framework.bean;
 
-import com.mright.spring.framework.beans.BeansException;
-import com.mright.spring.framework.beans.factory.*;
-import com.mright.spring.framework.context.ApplicationContext;
+import java.util.Random;
 
-public class IndexService implements InitializingBean, DisposableBean, BeanNameAware, BeanClassLoaderAware, ApplicationContextAware, BeanFactoryAware {
-    public IndexService() {
-        System.out.println("IndexService 构造方法");
-    }
-
-    private String uId;
-
-    private IIndexDao indexDao;
-
-    private ApplicationContext applicationContext;
-    private BeanFactory beanFactory;
+public class IndexService implements IIndexService {
 
     public String queryUserInfo() {
-        return indexDao.queryUserName(uId);
+        try {
+            Thread.sleep(new Random(1).nextInt(100));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "小傅哥，100001，深圳";
     }
 
-    public String getuId() {
-        return uId;
+    public String register(String userName) {
+        try {
+            Thread.sleep(new Random(1).nextInt(100));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "注册用户：" + userName + " success！";
     }
-
-    public void setuId(String uId) {
-        this.uId = uId;
-    }
-
-    public IIndexDao getIndexDao() {
-        return indexDao;
-    }
-
-    public void setIndexDao(IIndexDao indexDao) {
-        this.indexDao = indexDao;
-    }
-
-    @Override
-    public void destroy() throws Exception {
-        System.out.println("IndexService 销毁方法");
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("IndexService 初始化方法");
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
-
-    @Override
-    public void setBeanClassLoader(ClassLoader classLoader) {
-        System.out.println("ClassLoader：" + classLoader);
-    }
-
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.beanFactory = beanFactory;
-    }
-
-    @Override
-    public void setBeanName(String name) {
-        System.out.println("Bean Name is：" + name);
-    }
-
-    public ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
-
-    public BeanFactory getBeanFactory() {
-        return beanFactory;
-    }
-
 }
