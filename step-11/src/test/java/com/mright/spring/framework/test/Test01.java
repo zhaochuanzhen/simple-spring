@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class Test08 {
+public class Test01 {
 
     @Test
     public void test_proxy_method() {
