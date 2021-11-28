@@ -13,49 +13,39 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
     @Override
     public void refresh() throws BeansException {
-        // 1、创建BeanFactory，并加载BeanDefinition
+        // 1. 创建 BeanFactory，并加载 BeanDefinition
         refreshBeanFactory();
 
-        // 2、获取BeanFactory
+        // 2. 获取 BeanFactory
         ConfigurableListableBeanFactory beanFactory = getBeanFactory();
 
-        // 3、在Bean实例化之前、执行BeanFactoryPostProcessor
+        // 3. 在 Bean 实例化之前，执行 BeanFactoryPostProcessor (Invoke factory processors registered as beans in the context.)
         invokeBeanFactoryPostProcessors(beanFactory);
 
-        // 4、BeanPostProcessors 需要提前与其他Bean对象实例化之前执行注册操作
+        // 4. BeanPostProcessor 需要提前于其他 Bean 对象实例化之前执行注册操作
         registerBeanPostProcessors(beanFactory);
 
-        // 5、提前实例化单例Bean对象
+        // 5. 提前实例化单例Bean对象
         beanFactory.preInstantiateSingletons();
     }
 
-    @Override
-    public void registerShutdownHook() {
-        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
-    }
+    protected abstract void refreshBeanFactory() throws BeansException;
 
-    @Override
-    public void close() {
-        getBeanFactory().destroySingletons();
-    }
-
-    private void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory) {
-        final Map<String, BeanPostProcessor> beanPostProcessorMap = beanFactory.getBeansOfType(BeanPostProcessor.class);
-        for (BeanPostProcessor beanPostProcessor : beanPostProcessorMap.values()) {
-            beanFactory.addBeanPostProcessor(beanPostProcessor);
-        }
-    }
+    protected abstract ConfigurableListableBeanFactory getBeanFactory();
 
     private void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
-        final Map<String, BeanFactoryPostProcessor> beanFactoryPostProcessorMap = beanFactory.getBeansOfType(BeanFactoryPostProcessor.class);
+        Map<String, BeanFactoryPostProcessor> beanFactoryPostProcessorMap = beanFactory.getBeansOfType(BeanFactoryPostProcessor.class);
         for (BeanFactoryPostProcessor beanFactoryPostProcessor : beanFactoryPostProcessorMap.values()) {
             beanFactoryPostProcessor.postProcessBeanFactory(beanFactory);
         }
     }
 
-    protected abstract ConfigurableListableBeanFactory getBeanFactory();
-
-    protected abstract void refreshBeanFactory() throws BeansException;
+    private void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory) {
+        Map<String, BeanPostProcessor> beanPostProcessorMap = beanFactory.getBeansOfType(BeanPostProcessor.class);
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessorMap.values()) {
+            beanFactory.addBeanPostProcessor(beanPostProcessor);
+        }
+    }
 
     @Override
     public <T> Map<String, T> getBeansOfType(Class<T> type) throws BeansException {
@@ -68,8 +58,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     }
 
     @Override
-    public Object getBean(String beanName) {
-        return getBeanFactory().getBean(beanName);
+    public Object getBean(String name) throws BeansException {
+        return getBeanFactory().getBean(name);
     }
 
     @Override
@@ -81,4 +71,15 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     public <T> T getBean(String name, Class<T> requiredType) throws BeansException {
         return getBeanFactory().getBean(name, requiredType);
     }
+
+    @Override
+    public void registerShutdownHook() {
+        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
+    }
+
+    @Override
+    public void close() {
+        getBeanFactory().destroySingletons();
+    }
+
 }
