@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+
+    <bean id="indexService" class="com.mright.spring.framework.bean.IndexService">
+    </bean>
+
+    <bean id="indexServiceBeforeAdvice" class="com.mright.spring.framework.common.IndexServiceBeforeAdvice"/>
+    <bean id="defaultAdvisorAutoProxyCreator" class="com.mright.spring.framework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+    <bean id="methodBeforeAdviceInterceptor" class="com.mright.spring.framework.aop.framework.adapter.MethodBeforeAdviceInterceptor">
+        <property name="advice" ref="indexServiceBeforeAdvice"/>
+    </bean>
+    <bean id="aspectJExpressionPointcutAdvisor" class="com.mright.spring.framework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <property name="expression" value="execution(* com.mright.spring.framework.bean.IIndexService.*(..))"/>
+        <property name="advice" ref="methodBeforeAdviceInterceptor"/>
+    </bean>
+</beans>
