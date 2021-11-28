@@ -1,6 +1,5 @@
 package com.mright.spring.framework.aop.framework;
 
-
 import com.mright.spring.framework.aop.AdvisedSupport;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

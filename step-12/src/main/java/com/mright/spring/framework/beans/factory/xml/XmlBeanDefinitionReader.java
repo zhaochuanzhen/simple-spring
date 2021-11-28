@@ -29,10 +29,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
     @Override
     public void loadBeanDefinitions(Resource resource) throws BeansException {
-        try (InputStream inputStream = resource.getInputStream()) {
-            doLoadBeanDefinitions(inputStream);
+        try {
+            try (InputStream inputStream = resource.getInputStream()) {
+                doLoadBeanDefinitions(inputStream);
+            }
         } catch (IOException | ClassNotFoundException e) {
-            throw new BeansException("IOException parsing XML document from ");
+            throw new BeansException("IOException parsing XML document from " + resource);
         }
     }
 
@@ -89,6 +91,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             BeanDefinition beanDefinition = new BeanDefinition(clazz);
             beanDefinition.setInitMethodName(initMethod);
             beanDefinition.setDestroyMethodName(destroyMethodName);
+
             if (StrUtil.isNotEmpty(beanScope)) {
                 beanDefinition.setScope(beanScope);
             }

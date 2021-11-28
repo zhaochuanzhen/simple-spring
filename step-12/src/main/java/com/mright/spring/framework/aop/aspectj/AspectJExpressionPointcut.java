@@ -1,7 +1,6 @@
 package com.mright.spring.framework.aop.aspectj;
 
 
-
 import com.mright.spring.framework.aop.ClassFilter;
 import com.mright.spring.framework.aop.MethodMatcher;
 import com.mright.spring.framework.aop.Pointcut;
