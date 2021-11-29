@@ -17,7 +17,7 @@ public class Test1 {
             System.out.println(beanDefinitionName);
         }
 
-        Person mac = (Person) context.getBean("mac");
+        Person mac = (Person) context.getBean("windows");
         if (mac != null) {
             System.out.println(mac.getName());
         }

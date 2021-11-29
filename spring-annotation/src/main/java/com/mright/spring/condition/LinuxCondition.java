@@ -9,7 +9,7 @@ public class LinuxCondition implements Condition {
 
     public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
         Environment environment = conditionContext.getEnvironment();
-        if (environment.getProperty("os.name").contains("linux")) {
+        if (environment.getProperty("os.name").contains("Windows")) {
             return true;
         }
         return false;
