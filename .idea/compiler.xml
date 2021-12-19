@@ -17,6 +17,7 @@
         <module name="step-05" />
         <module name="step-08" />
         <module name="step-07" />
+        <module name="spring-codeRead" />
         <module name="step-09" />
         <module name="spring-annotation" />
       </profile>
