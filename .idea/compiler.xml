@@ -21,5 +21,8 @@
         <module name="spring-annotation" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jmq-demo" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
